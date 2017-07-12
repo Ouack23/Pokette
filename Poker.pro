@@ -32,7 +32,8 @@ SOURCES += main.cpp\
     functions.cpp \
     combinaison.cpp \
     gui/choosecardwindow.cpp \
-    gui/mainwindow.cpp
+    gui/mainwindow.cpp \
+    cards.cpp
 
 HEADERS  += pot_odds.h \
     card.h \
@@ -42,7 +43,8 @@ HEADERS  += pot_odds.h \
     functions.h \
     combinaison.h \
     gui/choosecardwindow.h \
-    gui/mainwindow.h
+    gui/mainwindow.h \
+    cards.h
 
 FORMS    += gui/choosecardwindow.ui \
     gui/mainwindow.ui

@@ -10,6 +10,8 @@
 #include "gui/choosecardwindow.h"
 #include "commoncards.h"
 #include "exception.h"
+#include "hand.h"
+#include "cards.h"
 
 namespace Ui {
 class MainWindow;
@@ -33,7 +35,7 @@ private:
 
 	Exception MainWindowException;
 	PotOdds MyPotOdds;
-	CommonCards MyCommonCards;
+	Cards MyCards;
 	int currentCard;
 	std::queue<QPushButton*> DisabledCardButtons;
 
@@ -43,7 +45,6 @@ private slots:
     void printPotOdds();
 	void updateCard(const Card);
 	void printWindowHandCard(const int);
-	void updateCombin();
 };
 
 #endif // MAINWINDOW_H

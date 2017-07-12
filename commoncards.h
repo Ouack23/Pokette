@@ -2,7 +2,6 @@
 #define COMMONCARDS_H
 
 #include "card.h"
-#include "hand.h"
 #include <vector>
 #include "exception.h"
 #include "combinaison.h"
@@ -15,12 +14,11 @@ public:
 	static const unsigned int QuadsSize = 4;
 	static const unsigned int FullSize = 5;
 
-	CommonCards(std::vector<Card> = std::vector<Card>(5), Hand=Hand());
+	CommonCards(std::vector<Card> = std::vector<Card>(5));
 	~CommonCards();
 	std::vector<Card> getFlop() const;
 	Card getTurn() const;
 	Card getRiver() const;
-	Hand getHand() const;
 	std::vector<Card> getCards() const;
 	Card getCard(const unsigned int) const;
 	void updateCombinaison();
@@ -32,8 +30,6 @@ public:
 
 private:
 	std::vector<Card> TableCards;
-	Hand HandCards;
-	Combinaison currentCombin;
 	Exception CommonCardsException;
 };
 

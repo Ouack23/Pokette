@@ -24,7 +24,7 @@ public:
 	unsigned int getValue(const unsigned int) const;
 	unsigned int getCombinValue() const;
 	QString getValueString(const unsigned int) const;
-
+	QString getCombinaisonQString() const;
 	void setValue(const unsigned int, const unsigned int);
 	void setComb(const unsigned int);
 	void sortValues();

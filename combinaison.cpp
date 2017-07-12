@@ -83,3 +83,53 @@ void Combinaison::setComb(const unsigned int c) {
 		combin = c;
 	else CombinaisonException.throwException("setComb(unsigned int)", "Cannot set this combination !");
 }
+
+QString Combinaison::getCombinaisonQString() const {
+	QString result;
+
+	switch(getCombinValue()) {
+	case Combinaison::carteHaute:
+		result.append("Carte haute ").append(getValueString(1));
+	break;
+
+	case Combinaison::paire:
+		result.append("Paire de ").append(getValueString(1));
+	break;
+
+	case Combinaison::doublePaire:
+		result.append("Deux paires de ").append(getValueString(1));
+		result.append(" et ").append(getValueString(2));
+	break;
+
+	case Combinaison::brelan:
+		result.append("Brelan de ").append(getValueString(1));
+	break;
+
+	case Combinaison::quinte:
+		result.append("Quinte à ").append(getValueString(1));
+	break;
+
+	case Combinaison::couleur:
+		result.append("Flush à ").append(getValueString(1));
+	break;
+
+	case Combinaison::full:
+		result.append("Full aux ").append(getValueString(1));
+		result.append(" par les ").append(getValueString(2));
+	break;
+
+	case Combinaison::carre:
+		result.append("Carré de ").append(getValueString(1));
+	break;
+
+	case Combinaison::quinteFlush:
+		result.append("Quinte Flush à ").append(getValueString(1));
+	break;
+
+	default:
+		CombinaisonException.throwException("getCurrentCombinaisonQString()", "unknown combinaison !");
+	break;
+	}
+
+	return result;
+}

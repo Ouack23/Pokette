@@ -38,9 +38,8 @@ void ChooseCardWindow::initCardButtons() {
 
 	if (CardButtonsList.isEmpty()) ChooseCardWindowException.throwException("initCardButtons", "Wrong size of CardButtonsList");
 
-	for (QList<QPushButton*>::iterator i = CardButtonsList.begin(); i < CardButtonsList.end(); i++) {
+	for (QList<QPushButton*>::iterator i = CardButtonsList.begin(); i < CardButtonsList.end(); i++)
 		CardButtons.push_back(*i);
-	}
 }
 
 void ChooseCardWindow::getCardFromButton(const QString buttonName) {
