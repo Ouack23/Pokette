@@ -66,7 +66,7 @@ bool CommonCards::setCard(const unsigned int n, Card MyCard) {
 			return false;
 		}
 		else {
-			TableCards.at(n) = MyCard;
+			TableCards.at(n).setCard(MyCard);
 			return true;
 		}
 	}

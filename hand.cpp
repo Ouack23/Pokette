@@ -7,8 +7,8 @@
 Hand::Hand(Card Card1, Card Card2):
 	Cards(std::vector<Card>(2)),
 	HandException(Exception("Hand")) {
-	Cards.push_back(Card1);
-	Cards.push_back(Card2);
+	Cards.at(0).setCard(Card1);
+	Cards.at(1).setCard(Card2);
 }
 
 Hand::~Hand() {
@@ -37,4 +37,9 @@ bool Hand::setCard(const int n, const Card MyCard) {
 		Cards.at(n).setCard(MyCard);
 		return true;
 	}
+}
+
+void Hand::setHand(const Hand h) {
+	for(unsigned int i = 0; i < h.getCards().size(); i++)
+		Cards.at(i).setCard(h.getCard(i));
 }

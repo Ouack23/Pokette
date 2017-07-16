@@ -15,6 +15,7 @@ public:
 	Card getOtherCard(const int) const;
 	std::vector<Card> getCards() const;
 	bool setCard(const int, const Card);
+	void setHand(const Hand h);
 
 private:
 	std::vector<Card> Cards;

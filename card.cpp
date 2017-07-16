@@ -45,8 +45,11 @@ Card::Card(int val, QChar col):
 
 }
 
-Card::Card(Card const& c): value(c.getValue()), color(c.getColor()) {
-	CardException = Exception("Card");
+Card::Card(Card const& c):
+	value(c.getValue()),
+	color(c.getColor()),
+	CardException(Exception("Card")) {
+
 }
 
 bool Card::operator==(const Card &c) const {
