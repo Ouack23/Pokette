@@ -62,7 +62,6 @@ bool Card::operator!=(const Card &c) const {
 }
 
 Card::~Card() {
-	delete &color;
 }
 
 unsigned int Card::getValue() const {
@@ -82,8 +81,14 @@ void Card::setColor(const QChar col) {
 }
 
 void Card::setCard(const Card c) {
+	if(c.getValue() == Card::defaultValue || c.getColor() == Card::defaultColor)
+		CardException.throwException("setCard(const Card c)", "Something wrong, setting card to default values");
+
 	setValue(c.getValue());
 	setColor(c.getColor());
+
+	if(getValue() != c.getValue() || getColor() != c.getColor())
+		CardException.throwException("setCard(const Card c)", "Card hasn't been correctly set");
 }
 
 void Card::setCard(const QString title) {
@@ -126,9 +131,8 @@ QString Card::getStyleSheet() const {
 
 	unsigned int val = getValue();
 
-	if (val <= tenInt) {
-		result.prepend(QString::number(val));
-	}
+	if (val <= tenInt) result.prepend(QString::number(val));
+
 	else {
 		switch(val) {
 			case jackInt:

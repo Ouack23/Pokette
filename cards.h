@@ -12,6 +12,7 @@ class Cards
 public:
 	Cards();
 	std::vector<Hand> getHands() const;
+	CommonCards getCommonCards() const;
 	std::vector<Card> getCommonCardsObjects() const;
 	std::vector<Card> getAllCards() const;
 	std::vector<Combinaison> getCombinaisons() const;

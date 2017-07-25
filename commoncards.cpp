@@ -2,7 +2,6 @@
 #include "card.h"
 #include "hand.h"
 #include "functions.h"
-#include "combinaison.h"
 #include <vector>
 #include <iostream>
 #include <QString>
@@ -22,9 +21,8 @@ std::vector<Card> CommonCards::getFlop() const {
 	std::vector<Card> result;
 	std::vector<Card>::const_iterator i;
 
-	for (i = TableCards.begin(); i <= TableCards.begin()+3; i++) {
+	for (i = TableCards.begin(); i <= TableCards.begin()+3; i++)
 		result.push_back(*i);
-	}
 
 	return result;
 }
@@ -67,7 +65,11 @@ bool CommonCards::setCard(const unsigned int n, Card MyCard) {
 		}
 		else {
 			TableCards.at(n).setCard(MyCard);
-			return true;
+			if(TableCards.at(n) != MyCard) {
+				CommonCardsException.throwException("setCard(const unsigned int n, Card MyCard)", "Card hasn't been correctly set");
+				return false;
+			}
+			else return true;
 		}
 	}
 }

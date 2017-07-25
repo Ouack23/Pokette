@@ -17,15 +17,21 @@ std::vector<Card> Cards::getCommonCardsObjects() const {
 	return MyCommonCards.getCards();
 }
 
+CommonCards Cards::getCommonCards() const {
+	return MyCommonCards;
+}
+
 std::vector<Card> Cards::getAllCards() const {
 	std::vector<Card> result = Hands.at(0).getCards();
 	std::vector<Card> tmp = MyCommonCards.getCards();
 
-	result.insert(result.end(), tmp.begin(), tmp.end());
+	for(std::vector<Card>::const_iterator j = tmp.begin(); j != tmp.end(); j++)
+		result.push_back(*j);
 
 	for(std::vector<Hand>::const_iterator i = Hands.begin()+1; i != Hands.end(); i++) {
 		tmp = (*i).getCards();
-		result.insert(result.end(), tmp.begin(), tmp.end());
+		for(std::vector<Card>::const_iterator j = tmp.begin(); j != tmp.end(); j++)
+			result.push_back(*j);
 	}
 
 	return result;
@@ -82,17 +88,41 @@ bool Cards::setCard(const unsigned int i, const Card c) {
 		return false;
 	else {
 		switch(i) {
+		case 0:
+		case 1:
+			return Hands.at(0).setCard(i,c);
+		break;
+
 		case 2:
 		case 3:
 		case 4:
 		case 5:
 		case 6:
-			return MyCommonCards.setCard(i-2, c);
+			return MyCommonCards.setCard(i-2,c);
 		break;
-		case 0:
-		case 1:
+
+		case 7:
+		case 8:
+			return Hands.at(1).setCard(i-7,c);
+		break;
+
+		case 9:
+		case 10:
+			return Hands.at(2).setCard(i-9,c);
+		break;
+
+		case 11:
+		case 12:
+			return Hands.at(3).setCard(i-11,c);
+		break;
+
+		case 13:
+		case 14:
+			return Hands.at(4).setCard(i-13,c);
+		break;
+
 		default:
-			return Hands.at(std::floor(i/2)).setCard(i, c);
+			return Hands.at(5).setCard(i-15, c);
 		break;
 		}
 	}

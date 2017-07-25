@@ -35,7 +35,11 @@ bool Hand::setCard(const int n, const Card MyCard) {
 	}
 	else {
 		Cards.at(n).setCard(MyCard);
-		return true;
+		if(getCard(n) != MyCard) {
+			HandException.throwException("Hand::setCard(const int, const Card)", "Card hasn't been correctly set !");
+			return false;
+		}
+		else return true;
 	}
 }
 

@@ -112,7 +112,7 @@ void MainWindow::updateCard(const Card NewCard) {
 		CardLabels.at(currentCard)->setText(currentCardInstance.getTitle());
 		SecondWindow->hide();
 	}
-	else MainWindowException.throwException("updateCard(Card NewCard)", "Cannot setCard(currentCard, NewCard) : already in hand");
+	else MainWindowException.throwException("updateCard(Card NewCard)", "Cannot setCard(currentCard, NewCard)");
 
 	updateDisabledButtons();
 	MyCards.updateCombinaisons();

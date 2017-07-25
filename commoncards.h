@@ -4,7 +4,6 @@
 #include "card.h"
 #include <vector>
 #include "exception.h"
-#include "combinaison.h"
 
 class CommonCards
 {
@@ -21,11 +20,8 @@ public:
 	Card getRiver() const;
 	std::vector<Card> getCards() const;
 	Card getCard(const unsigned int) const;
-	void updateCombinaison();
-	QString getCurrentCombinaisonQString() const;
 
 	bool setCard(const unsigned int, Card);
-	void setCombin(const Combinaison);
 	bool isAlreadyOut(const Card) const;
 
 private:
