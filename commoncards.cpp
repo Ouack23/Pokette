@@ -36,8 +36,8 @@ Card CommonCards::getRiver() const {
 }
 
 Card CommonCards::getCard(const unsigned int n) const {
-	if (n > getCards().size()) {
-		CommonCardsException.throwException("getCard(const int n", "n out of bound");
+	if (n >= getCards().size()) {
+		CommonCardsException.throwException("getCard(const unsigned int n)", "n out of bound");
 		return Card();
 	}
 	else return TableCards.at(n);
@@ -63,14 +63,7 @@ bool CommonCards::setCard(const unsigned int n, Card MyCard) {
 			CommonCardsException.throwException("setCard(const int n, Card MyCard)", "Card already out !");
 			return false;
 		}
-		else {
-			TableCards.at(n).setCard(MyCard);
-			if(TableCards.at(n) != MyCard) {
-				CommonCardsException.throwException("setCard(const unsigned int n, Card MyCard)", "Card hasn't been correctly set");
-				return false;
-			}
-			else return true;
-		}
+		else return TableCards.at(n).setCard(MyCard);
 	}
 }
 

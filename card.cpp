@@ -38,7 +38,7 @@ const QChar Card::defaultColor('u');
 
 const QChar Card::Colors[4] = {Card::SpadesColor, Card::ClubsColor, Card::HeartsColor, Card::DiamondsColor};
 
-Card::Card(int val, QChar col):
+Card::Card(unsigned int val, QChar col):
 	value(val),
 	color(col),
 	CardException(Exception("Card")) {
@@ -80,20 +80,26 @@ void Card::setColor(const QChar col) {
 	color = col;
 }
 
-void Card::setCard(const Card c) {
-	if(c.getValue() == Card::defaultValue || c.getColor() == Card::defaultColor)
+bool Card::setCard(const Card c) {
+	if(c.getValue() == Card::defaultValue || c.getColor() == Card::defaultColor) {
 		CardException.throwException("setCard(const Card c)", "Something wrong, setting card to default values");
+		return false;
+	}
 
 	setValue(c.getValue());
 	setColor(c.getColor());
 
-	if(getValue() != c.getValue() || getColor() != c.getColor())
+	if(getValue() != c.getValue() || getColor() != c.getColor()) {
 		CardException.throwException("setCard(const Card c)", "Card hasn't been correctly set");
+		return false;
+	}
+
+	return true;
 }
 
-void Card::setCard(const QString title) {
+bool Card::setCard(const QString title) {
 	Card MyCard = getCard(title);
-	setCard(MyCard);
+	return this->setCard(MyCard);
 }
 
 Card Card::getCard(const QString title) const {

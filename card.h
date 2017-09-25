@@ -18,7 +18,7 @@ public:
 	static const QChar SpadesColor, ClubsColor, HeartsColor, DiamondsColor;
 	static const QChar Colors[4];
 
-	Card(int=defaultValue, QChar=defaultColor);
+	Card(unsigned int=defaultValue, QChar=defaultColor);
 	Card(Card const&);
 	~Card();
 	bool operator==(const Card &) const;
@@ -28,8 +28,8 @@ public:
 	QString getTitle() const;
 	void setValue(const int);
 	void setColor(QChar);
-	void setCard(const QString);
-	void setCard(const Card);
+	bool setCard(const QString);
+	bool setCard(const Card);
 	Card getCard(const QString) const;
 	QString getStyleSheet() const;
 	QString getStringValue() const;

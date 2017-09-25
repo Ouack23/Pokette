@@ -4,11 +4,10 @@
 #include <iostream>
 #include "exception.h"
 
-Hand::Hand(Card Card1, Card Card2):
-	Cards(std::vector<Card>(2)),
+Hand::Hand(std::vector<Card> HandCards):
+	Cards(HandCards),
 	HandException(Exception("Hand")) {
-	Cards.at(0).setCard(Card1);
-	Cards.at(1).setCard(Card2);
+
 }
 
 Hand::~Hand() {
@@ -33,14 +32,7 @@ bool Hand::setCard(const int n, const Card MyCard) {
 		HandException.throwException("setCard(int n, Card MyCard)", "Cannot have the same card twice in hand");
 		return false;
 	}
-	else {
-		Cards.at(n).setCard(MyCard);
-		if(getCard(n) != MyCard) {
-			HandException.throwException("Hand::setCard(const int, const Card)", "Card hasn't been correctly set !");
-			return false;
-		}
-		else return true;
-	}
+	else return Cards.at(n).setCard(MyCard);
 }
 
 void Hand::setHand(const Hand h) {

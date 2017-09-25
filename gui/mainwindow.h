@@ -43,7 +43,7 @@ private:
 
 private slots:
     void printPotOdds();
-	void updateCard(const Card);
+	void updateCard(const QString);
 	void printWindowHandCard(const int);
 };
 

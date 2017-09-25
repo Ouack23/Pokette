@@ -23,8 +23,8 @@ ChooseCardWindow::ChooseCardWindow(QWidget *parent):
 		QObject::connect(*i, SIGNAL(clicked()), CardButtonsSignalMapper, SLOT(map()));
 	}
 
-	QObject::connect(CardButtonsSignalMapper, SIGNAL(mapped(QString)), this, SLOT(getCardFromButton(QString)));
-	QObject::connect(this, SIGNAL(CardSelected(Card)), parent, SLOT(updateCard(Card)));
+	QObject::connect(CardButtonsSignalMapper, SIGNAL(mapped(QString)), this, SLOT(getCardNameFromButton(QString)));
+	QObject::connect(this, SIGNAL(CardSelected(const QString)), parent, SLOT(updateCard(const QString)));
 }
 
 ChooseCardWindow::~ChooseCardWindow()
@@ -42,21 +42,19 @@ void ChooseCardWindow::initCardButtons() {
 		CardButtons.push_back(*i);
 }
 
-void ChooseCardWindow::getCardFromButton(const QString buttonName) {
+void ChooseCardWindow::getCardNameFromButton(const QString buttonName) {
 	//pushButton_2s
-	Card result = Card();
-	result.setCard(buttonName.right(2));
-	emit CardSelected(result);
+	emit CardSelected(buttonName.right(2));
 }
 
 QPushButton* ChooseCardWindow::getButtonFromCard(const Card c) {
 	QString title = c.getTitle();
 	title.prepend("pushButton_");
 
-	for (QList<QPushButton*>::iterator i = CardButtons.begin(); i < CardButtons.end(); i++) {
+	for (QList<QPushButton*>::iterator i = CardButtons.begin(); i != CardButtons.end(); i++) {
 		if ((*i)->objectName().contains(title))
 			return *i;
 	}
 
-	return new QPushButton();
+	return new QPushButton(0);
 }

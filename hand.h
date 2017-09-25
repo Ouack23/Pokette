@@ -9,7 +9,7 @@
 class Hand
 {
 public:
-	Hand(Card=Card(), Card=Card());
+	Hand(std::vector<Card> = std::vector<Card>(2));
 	~Hand();
 	Card getCard(const int) const;
 	Card getOtherCard(const int) const;

@@ -6,6 +6,7 @@
 #include "combinaison.h"
 #include "commoncards.h"
 #include "exception.h"
+#include "card.h"
 
 class Cards
 {
@@ -18,7 +19,7 @@ public:
 	std::vector<Combinaison> getCombinaisons() const;
 	Combinaison getCombinaisonOfHand(const unsigned int) const;
 	std::vector<std::pair<Hand, Combinaison>> getAllHandsAndCombinaisons() const;
-	std::vector<Card> getCardsFromHandAndCommonCards(const Hand) const;
+	std::vector<Card> getCardsFromHandAndCommonCards(const unsigned int) const;
 	void setHand(const Hand, const unsigned int);
 	void addHand(const Hand);
 	void addCombinaison(const Combinaison);
@@ -26,7 +27,7 @@ public:
 	bool setCommonCard(const unsigned int, const Card);
 	void setCombinaisonOfHand(const Combinaison, const unsigned int);
 	void updateCombinaisons();
-	void updateCombinaison(const Hand, unsigned int);
+	void updateCombinaison(const unsigned int i);
 	QString getCombinaisonQString(const unsigned int) const;
 
 private:

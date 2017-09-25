@@ -31,10 +31,10 @@ private:
 	void printCardButtons();
 
 private slots:
-	void getCardFromButton(const QString);
+	void getCardNameFromButton(const QString);
 
 signals:
-	void CardSelected(Card);
+	void CardSelected(const QString);
 };
 
 #endif // CHOOSECARDWINDOW_H

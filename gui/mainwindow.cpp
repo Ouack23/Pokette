@@ -29,6 +29,7 @@ MainWindow::MainWindow(QWidget *parent):
 	ui->setupUi(this);
 
 	CombinLabel = ui->label_combin;
+
 	ResultPotOdds.push_back(ui->result);
 	ResultPotOdds.push_back(ui->result_2);
 
@@ -103,10 +104,12 @@ void MainWindow::printWindowHandCard(const int n) {
 	SecondWindow->show();
 }
 
-void MainWindow::updateCard(const Card NewCard) {
-	std::vector<Card> allCards = MyCards.getAllCards();
+void MainWindow::updateCard(const QString CardName) {
+	Card NewCard = Card();
+	NewCard.setCard(CardName);
 
 	if (MyCards.setCard(currentCard, NewCard)) {
+		std::vector<Card> allCards = MyCards.getAllCards();
 		Card currentCardInstance = allCards.at(currentCard);
 		CardButtons.at(currentCard)->setStyleSheet(currentCardInstance.getStyleSheet());
 		CardLabels.at(currentCard)->setText(currentCardInstance.getTitle());
@@ -120,10 +123,10 @@ void MainWindow::updateCard(const Card NewCard) {
 
 void MainWindow::updateDisabledButtons() {
 	std::vector<Card> CurrentCards = MyCards.getAllCards();
-	std::vector<Card>::iterator i;
+	std::vector<Card>::const_iterator i;
 	QPushButton* tmp(0);
 
-	while (DisabledCardButtons.size() != 0) {
+	while (!DisabledCardButtons.empty()) {
 		DisabledCardButtons.front()->setDisabled(false);
 		DisabledCardButtons.pop();
 	}

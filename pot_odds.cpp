@@ -6,7 +6,7 @@ PotOdds::PotOdds():mise(0), pot(0), PotOddsException(Exception("PotOdds")) {
 
 }
 
-PotOdds::PotOdds(int miseValue, int potValue):
+PotOdds::PotOdds(unsigned int miseValue, unsigned int potValue):
 mise(miseValue),
 pot(potValue)
 {
@@ -17,7 +17,7 @@ PotOdds::~PotOdds() {
 
 }
 
-void PotOdds::setValues(const int miseVal, const int potVal) {
+void PotOdds::setValues(const unsigned int miseVal, const unsigned int potVal) {
 	mise = miseVal;
 	pot = potVal;
 }

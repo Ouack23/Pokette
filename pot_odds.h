@@ -8,15 +8,15 @@ class PotOdds
 {
 public:
 	PotOdds();
-	PotOdds(int, int);
+	PotOdds(unsigned int, unsigned int);
 	~PotOdds();
 	double getPotOddsValue() const;
 	QString getPotOdds() const;
 	QString getPotOdds2() const;
-	void setValues(const int miseVal, const int potVal);
+	void setValues(const unsigned int miseVal, const unsigned int potVal);
 
 private:
-    int mise, pot;
+	unsigned int mise, pot;
 	Exception PotOddsException;
 };
 

@@ -1,5 +1,6 @@
 #include "cards.h"
 #include "functions.h"
+#include "card.h"
 
 Cards::Cards():
 	MyCommonCards(CommonCards()),
@@ -59,11 +60,13 @@ std::vector<std::pair<Hand, Combinaison>> Cards::getAllHandsAndCombinaisons() co
 	return result;
 }
 
-std::vector<Card> Cards::getCardsFromHandAndCommonCards(const Hand h) const {
-	std::vector<Card> result = MyCommonCards.getCards();
-	std::vector<Card> tmp = h.getCards();
+std::vector<Card> Cards::getCardsFromHandAndCommonCards(const unsigned int i) const {
+	std::vector<Card> result = Hands.at(i).getCards();
+	std::vector<Card> myCommonCardsVector = MyCommonCards.getCards();
 
-	result.insert(result.begin(), tmp.begin(), tmp.end());
+	for(std::vector<Card>::iterator it = myCommonCardsVector.begin(); it != myCommonCardsVector.end(); it++) {
+		result.push_back(*it);
+	}
 
 	return result;
 }
@@ -90,7 +93,7 @@ bool Cards::setCard(const unsigned int i, const Card c) {
 		switch(i) {
 		case 0:
 		case 1:
-			return Hands.at(0).setCard(i,c);
+			return Hands.at(0).setCard(i, c);
 		break;
 
 		case 2:
@@ -98,27 +101,27 @@ bool Cards::setCard(const unsigned int i, const Card c) {
 		case 4:
 		case 5:
 		case 6:
-			return MyCommonCards.setCard(i-2,c);
+			return MyCommonCards.setCard(i-2, c);
 		break;
 
 		case 7:
 		case 8:
-			return Hands.at(1).setCard(i-7,c);
+			return Hands.at(1).setCard(i-7, c);
 		break;
 
 		case 9:
 		case 10:
-			return Hands.at(2).setCard(i-9,c);
+			return Hands.at(2).setCard(i-9, c);
 		break;
 
 		case 11:
 		case 12:
-			return Hands.at(3).setCard(i-11,c);
+			return Hands.at(3).setCard(i-11, c);
 		break;
 
 		case 13:
 		case 14:
-			return Hands.at(4).setCard(i-13,c);
+			return Hands.at(4).setCard(i-13, c);
 		break;
 
 		default:
@@ -138,15 +141,12 @@ void Cards::setCombinaisonOfHand(const Combinaison c, const unsigned i) {
 }
 
 void Cards::updateCombinaisons() {
-	unsigned int index = 0;
-	for(std::vector<Hand>::iterator i = Hands.begin(); i != Hands.end(); i++) {
-		updateCombinaison(*i, index);
-		index++;
-	}
+	for(unsigned int i = 0; i < Hands.size(); i++)
+		updateCombinaison(i);
 }
 
-void Cards::updateCombinaison(const Hand h, unsigned int index) {
-	std::vector<Card> allCards = this->getCardsFromHandAndCommonCards(h);
+void Cards::updateCombinaison(unsigned int i) {
+	std::vector<Card> allCards = this->getCardsFromHandAndCommonCards(i);
 	std::vector<std::pair<unsigned int, unsigned int>> allCardsDifferentValues = getDifferentValues(allCards);
 	std::vector<std::pair<QChar, unsigned int>> allCardsDifferentColors = getDifferentColors(allCards);
 	std::vector<unsigned int> allCardsValues(0);
@@ -164,8 +164,7 @@ void Cards::updateCombinaison(const Hand h, unsigned int index) {
 		if((*i).first != Card::defaultValue) {
 			switch((*i).second) {
 			case 1:
-				if(tmpBest.getCombinValue() == Combinaison::carteHaute &&
-						tmpBest.getValue(1) < (*i).first)
+				if(tmpBest.getCombinValue() == Combinaison::carteHaute && tmpBest.getValue(1) < (*i).first)
 					tmpBest.setValue(1, (*i).first);
 				break;
 
@@ -241,5 +240,5 @@ void Cards::updateCombinaison(const Hand h, unsigned int index) {
 		tmpBest.setValue(1, isStraight);
 	}
 
-	Combinaisons.at(index).setComb(tmpBest.getCombinValue());
+	Combinaisons.at(i).setComb(tmpBest.getCombinValue());
 }
